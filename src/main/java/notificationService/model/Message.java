@@ -8,13 +8,19 @@ public abstract class Message {
     private String id;
     private ChannelKind channelKind;
     private String text;
-    private Date creationData;
+    private Date creationDate;
     private Date sendDate;
-
 
     public Message() {
         id = UUID.randomUUID().toString();
-        creationData = new Date();
+        creationDate = new Date();
+    }
+
+    public Message(ChannelKind channelKind, String text, Date sendDate) {
+        this();
+        this.channelKind = channelKind;
+        this.text = text;
+        this.sendDate = sendDate;
     }
 
     public String getId() {
@@ -41,12 +47,12 @@ public abstract class Message {
         this.text = text;
     }
 
-    public Date getCreationData() {
-        return creationData;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreationData(Date creationData) {
-        this.creationData = creationData;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Date getSendDate() {
@@ -65,13 +71,13 @@ public abstract class Message {
         return Objects.equals(id, message.id) &&
                 channelKind == message.channelKind &&
                 Objects.equals(text, message.text) &&
-                Objects.equals(creationData, message.creationData) &&
+                Objects.equals(creationDate, message.creationDate) &&
                 Objects.equals(sendDate, message.sendDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, channelKind, text, creationData, sendDate);
+        return Objects.hash(id, channelKind, text, creationDate, sendDate);
     }
 
     @Override
@@ -80,7 +86,7 @@ public abstract class Message {
                 "id='" + id + '\'' +
                 ", channelKind=" + channelKind +
                 ", text='" + text + '\'' +
-                ", creationData=" + creationData +
+                ", creationDate=" + creationDate +
                 ", sendDate=" + sendDate +
                 '}';
     }

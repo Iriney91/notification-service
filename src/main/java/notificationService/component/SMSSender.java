@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class SMSSender <T> implements Senders<T> {
+public class SMSSender <T> implements Sender<T> {
     private static final Logger LOGGER = LogManager.getLogger(SMSSender.class);
 
     @Override

@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class EmailSender<T> implements Senders<T> {
+public class EmailSender<T> implements Sender<T> {
 
     private static final Logger LOGGER = LogManager.getLogger(EmailSender.class);
 
