@@ -1,6 +1,6 @@
 package notificationService.service;
 
-import notificationService.component.Sender;
+import notificationService.component.Senders;
 import notificationService.component.SenderFactory;
 import notificationService.model.ChannelKind;
 import notificationService.model.Message;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Notificator {
     private static Notificator instance;
-    private Map <ChannelKind, Sender> senderMap;
+    private Map <ChannelKind, Senders> senderMap;
 
     void performMarketingCampaingMailing (List <Message> messages){
 
@@ -30,6 +30,3 @@ public class Notificator {
     }
 }
 
-    }
-
-}

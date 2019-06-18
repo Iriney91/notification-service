@@ -1,12 +1,29 @@
 package notificationService.model;
 
 import java.util.Date;
+import java.util.Objects;
+import java.util.UUID;
 
 public abstract class Message {
-    ChannelKind channelKind;
-    String text;
-    Date createData;
-    Date sendDate;
+    private String id;
+    private ChannelKind channelKind;
+    private String text;
+    private Date creationData;
+    private Date sendDate;
+
+
+    public Message() {
+        id = UUID.randomUUID().toString();
+        creationData = new Date();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public ChannelKind getChannelKind() {
         return channelKind;
@@ -24,12 +41,12 @@ public abstract class Message {
         this.text = text;
     }
 
-    public Date getCreateData() {
-        return createData;
+    public Date getCreationData() {
+        return creationData;
     }
 
-    public void setCreateData(Date createData) {
-        this.createData = createData;
+    public void setCreationData(Date creationData) {
+        this.creationData = creationData;
     }
 
     public Date getSendDate() {
@@ -38,5 +55,33 @@ public abstract class Message {
 
     public void setSendDate(Date sendDate) {
         this.sendDate = sendDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return Objects.equals(id, message.id) &&
+                channelKind == message.channelKind &&
+                Objects.equals(text, message.text) &&
+                Objects.equals(creationData, message.creationData) &&
+                Objects.equals(sendDate, message.sendDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, channelKind, text, creationData, sendDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id='" + id + '\'' +
+                ", channelKind=" + channelKind +
+                ", text='" + text + '\'' +
+                ", creationData=" + creationData +
+                ", sendDate=" + sendDate +
+                '}';
     }
 }

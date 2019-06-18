@@ -1,15 +1,13 @@
 package notificationService.component;
 
 import notificationService.model.ChannelKind;
-import notificationService.model.EmailMessage;
-import notificationService.model.SMSMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SenderFactory {
 
-    public static Sender create (ChannelKind channelKind){
+    public static Senders create (ChannelKind channelKind){
         switch (channelKind){
             case SMS:
                 return new SMSSender();
@@ -19,9 +17,9 @@ public class SenderFactory {
                     return null;
         }
     }
-    public static List <Sender> create (List <ChannelKind> kinds){
+    public static List <Senders> create (List <ChannelKind> kinds){
 
-        List<Sender> sender = new ArrayList();
+        List<Senders> sender = new ArrayList();
         for (ChannelKind type : kinds) {
             sender.add(create(type));
         }
