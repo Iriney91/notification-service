@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SenderFactory {
 
-    public Sender create (ChannelKind channelKind){
+    public static Sender create (ChannelKind channelKind){
         switch (channelKind){
             case SMS:
                 return new SMSSender();
@@ -19,12 +19,12 @@ public class SenderFactory {
                     return null;
         }
     }
-    public List <Sender> create (List <ChannelKind> kinds){
+    public static List <Sender> create (List <ChannelKind> kinds){
 
-        List<Sender> messages = new ArrayList();
+        List<Sender> sender = new ArrayList();
         for (ChannelKind type : kinds) {
-            messages.add(create(type));
+            sender.add(create(type));
         }
-        return messages;
+        return sender;
     }
 }
