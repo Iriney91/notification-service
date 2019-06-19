@@ -32,13 +32,7 @@ public class Notificator {
             throw new IllegalArgumentException("Messages is empty");
         }
         List<ChannelKind> channelKinds = messages.stream()
-                .filter(message -> {
-                    if (message.getChannelKind() != null) return true;
-                    else {
-                        LOGGER.error("message.ChannelKind is null");
-                        return false;
-                    }
-                })
+                .filter(message -> (message.getChannelKind() != null))
                 .map(Message::getChannelKind)
                 .distinct()
                 .collect(Collectors.toList());
@@ -51,13 +45,15 @@ public class Notificator {
             LOGGER.info(String.format("senderMap is feeled : %d senders", senderMap.size()));
         } else {
             for (ChannelKind channelKind : channelKinds) {
-                if (!senderMap.containsKey(channelKind))
+                if (!senderMap.containsKey(channelKind)) {
                     senderMap.put(channelKind, SenderFactory.create(channelKind));
-                LOGGER.info(String.format("senderMap changed : %d senders", senderMap.size()));
+                    LOGGER.info(String.format("senderMap changed : %d senders", senderMap.size()));
+                }
             }
         }
 
         messages.forEach(message -> sendMessage(message));
+        LOGGER.info("All messages sent");
 
     }
 
@@ -68,12 +64,3 @@ public class Notificator {
         else senderMap.get(message.getChannelKind()).sendMessage(message);
     }
 }
-
-//    List<MessageSender> list = SenderFactory.create(channels);
-//list.stream().forEach(a-> senders.put(a.getChannelKind(),a));
-
-
-//    List<Sender> list = SenderFactory.create(channelKinds);
-//list.stream().forEach(a-> senders.put(a.getChannelKind(),a));
-
-// SenderFactory.create(channelKinds).stream().map(sender -> senderMap.put(sender.getChannelKind(), sender));
