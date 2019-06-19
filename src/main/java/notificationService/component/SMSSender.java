@@ -1,5 +1,6 @@
 package notificationService.component;
 
+import notificationService.model.ChannelKind;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,5 +17,10 @@ public class SMSSender <T> implements Sender<T> {
     @Override
     public void sendMessage(List<T> messages) {
         LOGGER.debug("Send message: {} by sms sender", messages);
+    }
+
+    @Override
+    public ChannelKind getChannelKind() {
+        return ChannelKind.SMS;
     }
 }

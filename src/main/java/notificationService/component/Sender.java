@@ -1,5 +1,6 @@
 package notificationService.component;
 
+import notificationService.model.ChannelKind;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,4 +18,5 @@ public interface Sender<T> {
         LOGGER.debug("Send messages: {} by default sender", messages);
     }
 
+    ChannelKind getChannelKind();
 }
