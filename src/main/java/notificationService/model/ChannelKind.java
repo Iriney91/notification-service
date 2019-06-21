@@ -5,5 +5,4 @@ public enum ChannelKind {
     SMS,
     PUSH,
     TELEGRAM;
-
 }

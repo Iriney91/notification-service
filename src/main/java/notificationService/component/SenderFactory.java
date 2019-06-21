@@ -15,6 +15,8 @@ public class SenderFactory {
                 return new EmailSender();
             case PUSH:
                 return new PushNotificationSender();
+            case TELEGRAM:
+                return  new TelegramSender();
             default:
                 throw new IllegalArgumentException("Unknown channelKind");
         }
