@@ -12,7 +12,6 @@ import java.util.Properties;
 public class EmailSender<T> implements Sender<T> {
 
     private String messagepath;
-    private PrintWriter writer;
 
     public EmailSender() {
         Properties properties = new Properties();
@@ -28,6 +27,18 @@ public class EmailSender<T> implements Sender<T> {
         }
     }
 
+    public void writer() {
+        try {
+            FileWriter writer = new FileWriter("email/emails.csv");
+            writer.append("njiji");
+            writer.append("urhru");
+            writer.append("urhru");
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            LOGGER.error("Файл свойств отсуствует!");
+        }
+    }
     private static final Logger LOGGER = LogManager.getLogger(EmailSender.class);
 
     @Override
@@ -37,6 +48,7 @@ public class EmailSender<T> implements Sender<T> {
 
     @Override
     public void sendMessage(List<T> messages) {
+
         LOGGER.debug("Send message: {} by email sender", messages);
     }
 
