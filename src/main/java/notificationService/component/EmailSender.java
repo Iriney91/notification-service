@@ -1,44 +1,18 @@
 package notificationService.component;
 
 import notificationService.model.ChannelKind;
-import notificationService.model.EmailMessage;
+import notificationService.model.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class EmailSender<T> implements Sender<T> {
 
-    private String messagepath;
+    public static String path = PropertiesService.getFilePath("src/main/resources/emailSender.properties");
 
-    public EmailSender() {
-        Properties properties = new Properties();
-        FileInputStream fis;
-
-        try {
-            fis = new FileInputStream("src/main/resources/emailSender.properties");
-            properties.load(fis);
-            fis.close();
-            messagepath = properties.getProperty("message.path");
-        } catch (IOException e) {
-            LOGGER.error("Файл свойств отсуствует!");
-        }
-    }
-
-    public void writer() {
-        try {
-            FileWriter writer = new FileWriter("email/emails.csv");
-            writer.append("njiji");
-            writer.append("urhru");
-            writer.append("urhru");
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            LOGGER.error("Файл свойств отсуствует!");
-        }
-    }
     private static final Logger LOGGER = LogManager.getLogger(EmailSender.class);
 
     @Override
@@ -48,7 +22,7 @@ public class EmailSender<T> implements Sender<T> {
 
     @Override
     public void sendMessage(List<T> messages) {
-
+        Converter.convertToCSV(messages);
         LOGGER.debug("Send message: {} by email sender", messages);
     }
 

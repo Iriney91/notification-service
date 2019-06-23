@@ -1,6 +1,7 @@
 package notificationService.component;
 
 import notificationService.model.ChannelKind;
+import notificationService.model.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

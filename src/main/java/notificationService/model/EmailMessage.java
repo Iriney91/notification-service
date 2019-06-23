@@ -4,6 +4,8 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 public class EmailMessage extends Message {
@@ -16,4 +18,21 @@ public class EmailMessage extends Message {
         this.emailTo = emailTo;
         this.emailCC = emailCC;
     }
+//
+//    public String convertToCSV() {
+//        String[] data = {emailTo, String.join( ",", emailCC), getText(), getSendDate().toLocaleString()};
+//
+//        return Stream.of(data)
+//                .map(this::escapeSpecialCharacters)
+//                .collect(Collectors.joining(";"));
+//    }
+//
+//    private String escapeSpecialCharacters(String data) {
+//        String escapedData = data.replaceAll("\\R", " ");
+//        if (data.contains(";") || data.contains("\"") || data.contains("'")) {
+//            data = data.replace("\"", "\"\"");
+//            escapedData = "\"" + data + "\"";
+//        }
+//        return escapedData;
+//    }
 }
