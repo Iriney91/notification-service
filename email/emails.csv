@@ -1,14 +1,11 @@
-Dataa,Soobchenie,Sender
-njiji,"Prive, ya tebe vchera pisal",njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-njiji,njiji,njiji
-EmailMessage{emailTo='Orlov', emailCC=[jjv, fvfv]}/nEmailMessage{emailTo='Orlov', emailCC=[jjv, fvfv]}/n
+Petrov;[Orlov, Ivanov];See ;you;Sun Jun 23 22:55:23 MSK 2019
+Orlov;[Petrov, Pupkin];Hello;Sun Jun 23 22:55:23 MSK 2019
+Orlov;[Petrov, Ivanov];Hello;Sun Jun 23 23:54:56 MSK 2019
+Petrov;[Orlov, Ivanov];See you;Sun Jun 23 23:54:56 MSK 2019
+Orlov;[Petrov, Pupkin];Hello;Sun Jun 23 23:54:56 MSK 2019
+Orlov;[Petrov, Ivanov];Hello;Mon Jun 24 00:08:03 MSK 2019
+Petrov;[Orlov, Ivanov];See you;Mon Jun 24 00:08:03 MSK 2019
+Orlov;[Petrov, Pupkin];Hello;Mon Jun 24 00:08:03 MSK 2019
+Orlov;[Petrov, Ivanov];Hello;Mon Jun 24 00:10:18 MSK 2019
+Petrov;[Orlov, Ivanov];See you;Mon Jun 24 00:10:18 MSK 2019
+Orlov;[Petrov, Pupkin];Hello;Mon Jun 24 00:10:19 MSK 2019

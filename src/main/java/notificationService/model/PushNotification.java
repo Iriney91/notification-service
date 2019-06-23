@@ -2,12 +2,19 @@ package notificationService.model;
 
 import lombok.Data;
 
+import javax.xml.bind.annotation.*;
 import java.util.Date;
-import java.util.Objects;
-@Data
 
-public class PushNotification extends  Message{
-    private String recipientId;
+@Data
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class PushNotification extends Message{
+
+    public String recipientId;
+
+    public PushNotification() {
+        super();
+    }
 
     public PushNotification(String recipientId, String text, Date sendDate) {
         super(ChannelKind.PUSH, text, sendDate);

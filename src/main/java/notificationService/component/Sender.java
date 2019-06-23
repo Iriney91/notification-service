@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public interface Sender<T> {
+public interface Sender<T extends Message> {
 
     Logger LOGGER = LogManager.getLogger(Sender.class);
 

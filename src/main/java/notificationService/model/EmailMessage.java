@@ -38,9 +38,6 @@ public class EmailMessage extends Message {
 
     @Override
     public String toString() {
-        return "EmailMessage{" +
-                "emailTo='" + emailTo + '\'' +
-                ", emailCC=" + emailCC +
-                '}';
+        return emailTo + ';' + emailCC + ";" + getText() + ";" + getSendDate();
     }
 }
