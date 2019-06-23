@@ -1,12 +1,10 @@
 package notificationService.component;
 
 import notificationService.model.ChannelKind;
-import notificationService.model.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.FileWriter;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class EmailSender<T> implements Sender<T> {
@@ -17,12 +15,15 @@ public class EmailSender<T> implements Sender<T> {
 
     @Override
     public void sendMessage(T message) {
+        Converter converter = new Converter();
+        converter.convertToCSV(Collections.singletonList(message));
         LOGGER.debug("Send message: {} by email sender", message);
     }
 
     @Override
     public void sendMessage(List<T> messages) {
-        Converter.convertToCSV(messages);
+        Converter converter = new Converter();
+        converter.convertToCSV(messages);
         LOGGER.debug("Send message: {} by email sender", messages);
     }
 

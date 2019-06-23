@@ -8,6 +8,7 @@ import notificationService.model.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,10 +43,6 @@ public class NotificationService {
             }
         }
     }
-    private void checkSenderPresence(@NonNull ChannelKind channelKind){
-        if (!senderMap.containsKey(channelKind))
-        senderMap.put(channelKind, SenderFactory.create(channelKind));
-    }
 
     public void sendMessages(List<Message> messages) {
         if (messages == null || messages.size() < 1) {
@@ -63,8 +60,8 @@ public class NotificationService {
 
     }
 
-    public void sendMessage(Message message) {
-        checkSenderPresence(message.getChannelKind());
+    public void sendMessage(Message message){
+        checkSenderPresence(Collections.singletonList(message.getChannelKind()));
         senderMap.get(message.getChannelKind()).sendMessage(message);
     }
 }

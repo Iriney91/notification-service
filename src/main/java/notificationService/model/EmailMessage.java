@@ -35,4 +35,12 @@ public class EmailMessage extends Message {
 //        }
 //        return escapedData;
 //    }
+
+    @Override
+    public String toString() {
+        return "EmailMessage{" +
+                "emailTo='" + emailTo + '\'' +
+                ", emailCC=" + emailCC +
+                '}';
+    }
 }
