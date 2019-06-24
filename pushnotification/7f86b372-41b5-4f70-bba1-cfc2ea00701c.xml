@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <pushNotification>
     <channelKind>PUSH</channelKind>
-    <creationDate>2019-06-24T01:41:05.182+03:00</creationDate>
-    <id>c060f310-47e3-4c4e-a19d-3ca8a7eff546</id>
-    <sendDate>2019-06-24T01:41:05.182+03:00</sendDate>
+    <creationDate>2019-06-24T11:59:01.251+03:00</creationDate>
+    <id>7f86b372-41b5-4f70-bba1-cfc2ea00701c</id>
+    <sendDate>2019-06-24T11:59:01.251+03:00</sendDate>
     <text>Hello</text>
     <recipientId>1</recipientId>
 </pushNotification>

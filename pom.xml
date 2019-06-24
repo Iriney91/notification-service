@@ -7,6 +7,7 @@
     <groupId>ru.itfbgroup.telecom.services</groupId>
     <artifactId>notification-service</artifactId>
     <version>1.0.0</version>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,8 +20,12 @@
         <lombok.version>1.18.8</lombok.version>
         <jackson.version>2.9.9</jackson.version>
     </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>

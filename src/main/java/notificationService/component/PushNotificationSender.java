@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PushNotificationSender<T extends PushNotification> implements Sender<Message> {
     private static final Logger LOGGER = LogManager.getLogger(PushNotificationSender.class);
-    public static String pushpath = PropertiesService.getFilePath("src/main/resources/pushnotificationSender.properties");
+    public static String pushpath = PropertiesService.getFilePath("src\\main\\resources\\pushnotificationSender.properties");
 
     @Override
     public void sendMessage(Message message) {
