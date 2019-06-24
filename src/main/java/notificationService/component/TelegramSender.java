@@ -11,7 +11,7 @@ import java.util.List;
 public class TelegramSender<T extends Message> implements  Sender<Message> {
 
     private static final Logger LOGGER = LogManager.getLogger(TelegramSender.class);
-    public static String telegrampath = PropertiesService.getFilePath("src\\main\\resources\\telegramSender.properties");
+    public static String telegrampath = PropertiesService.getFilePath("src/main/resources/telegramSender.properties");
 
     @Override
     public void sendMessage(Message message) {
