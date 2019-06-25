@@ -1,15 +1,23 @@
 package notificationService.component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import notificationService.model.ChannelKind;
 import notificationService.model.Message;
 import notificationService.model.PushNotification;
+import notificationService.model.Telegram;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Converter {
     private static final Logger LOGGER = LogManager.getLogger(Converter.class);
@@ -57,18 +65,45 @@ public class Converter {
         }
     }
 
-//    public static void readFromJson(ChannelKind channelKind, String path, List<Message> messages){
-//        try (Stream<Path> walk = Files.walk(Paths.get("C:\\projects"))) {
-//
-//            List<String> result = walk.filter(Files::isRegularFile)
-//                    .map(x -> x.toString()).collect(Collectors.toList());
-//
-//            result.forEach(System.out::println);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public static Message convertFromJson(ChannelKind channelKind, String path, String id) {
+        ObjectMapper mapper = new ObjectMapper();
+        String filepath = path + File.separator + id + ".json";
+
+        try {
+            switch (channelKind) {
+                case TELEGRAM:
+                    Message m = mapper.readValue(new FileInputStream(filepath), Telegram.class);
+                    System.out.println(filepath);
+                    return m;
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return  null;
+    }
+
+    public static List <Message> convertFromJson(ChannelKind channelKind, String path) {
+        ObjectMapper mapper = new ObjectMapper();
+        List <Message> messages = new ArrayList<>();
+        try (Stream<Path> walk = Files.walk(Paths.get(path))) {
+            List<String> files = walk.filter(Files::isRegularFile)
+                    .map(x -> x.toString()).collect(Collectors.toList());
+
+            for (String file : files) {
+
+                switch (channelKind) {
+                    case TELEGRAM:
+                         messages.add(mapper.readValue(new FileInputStream(file), Telegram.class));
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return  messages;
+    }
+
+
 
     public static void Serialize(List<Message> messages, String path) {
         for (Message message : messages) {

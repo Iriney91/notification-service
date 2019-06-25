@@ -13,6 +13,10 @@ public class Telegram extends Message {
     private String telegramTo;
     private List<String> telegramCC;
 
+    public Telegram() {
+        super();
+    }
+
     public Telegram(String telegramTo, List<String> telegramCC, String text, Date sendDate) {
         super(ChannelKind.TELEGRAM, text, sendDate);
         this.telegramTo = telegramTo;
