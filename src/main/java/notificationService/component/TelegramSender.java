@@ -29,4 +29,14 @@ public class TelegramSender<T extends Message> implements  Sender<Message> {
     public ChannelKind getChannelKind() {
         return ChannelKind.TELEGRAM;
     }
+
+    @Override
+    public void readMessage(String id, ChannelKind channelKind) {
+
+    }
+
+    @Override
+    public void readMessages(ChannelKind channelKind) {
+
+    }
 }

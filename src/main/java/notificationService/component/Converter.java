@@ -57,6 +57,19 @@ public class Converter {
         }
     }
 
+//    public static void readFromJson(ChannelKind channelKind, String path, List<Message> messages){
+//        try (Stream<Path> walk = Files.walk(Paths.get("C:\\projects"))) {
+//
+//            List<String> result = walk.filter(Files::isRegularFile)
+//                    .map(x -> x.toString()).collect(Collectors.toList());
+//
+//            result.forEach(System.out::println);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public static void Serialize(List<Message> messages, String path) {
         for (Message message : messages) {
             try {
