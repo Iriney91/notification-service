@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EmailSender<T extends EmailMessage> implements Sender<Message> {
 
-    public static String emailpath = PropertiesService.getFilePath("src\\main\\resources\\emailSender.properties");
+    public static String emailpath = PropertiesService.getFilePath("src/main/resources/emailSender.properties");
 
     private static final Logger LOGGER = LogManager.getLogger(EmailSender.class);
 

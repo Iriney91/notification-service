@@ -19,5 +19,9 @@ public interface Sender<T extends Message> {
         LOGGER.debug("Send messages: {} by default sender", messages);
     }
 
+    default void readMessage (String id, ChannelKind channelKind) {  LOGGER.debug("Read message: {} by default sender");}
+
+    default void readMessages (ChannelKind channelKind){ LOGGER.debug("Read messages: {} by default sender");}
+
     ChannelKind getChannelKind();
 }

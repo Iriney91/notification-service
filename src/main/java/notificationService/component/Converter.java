@@ -17,7 +17,7 @@ public class Converter {
     public static void convertToCSV(List<Message> messages) {
         try {
             String path = EmailSender.emailpath;
-            File f = new File(path + "\\emails.csv");
+            File f = new File(path + "/emails.csv");
             FileWriter writer = new FileWriter(f, true);
             for (Message message : messages) {
                 writer.append(message.toString());
@@ -36,7 +36,7 @@ public class Converter {
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             for (Message message : messages) {
-                File file = new File(path + "\\" + message.getId() + ".xml");
+                File file = new File(path + "/" + message.getId() + ".xml");
                 jaxbMarshaller.marshal(message, file);
             }
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class Converter {
         ObjectMapper mapper = new ObjectMapper();
         for (Message message : messages) {
             try {
-                File f = new File(path + "\\" + message.getId() + ".json");
+                File f = new File(path + "/" + message.getId() + ".json");
                 mapper.writeValue(f, message);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -57,11 +57,24 @@ public class Converter {
         }
     }
 
+//    public static void readFromJson(ChannelKind channelKind, String path, List<Message> messages){
+//        try (Stream<Path> walk = Files.walk(Paths.get("C:\\projects"))) {
+//
+//            List<String> result = walk.filter(Files::isRegularFile)
+//                    .map(x -> x.toString()).collect(Collectors.toList());
+//
+//            result.forEach(System.out::println);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public static void Serialize(List<Message> messages, String path) {
         for (Message message : messages) {
             try {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                        new FileOutputStream(path + "\\" + message.getId() + ".out"));
+                        new FileOutputStream(path + "/" + message.getId() + ".out"));
                 objectOutputStream.writeObject(message);
                 objectOutputStream.close();
             } catch (Exception e) {
