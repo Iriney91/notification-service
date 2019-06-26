@@ -64,4 +64,6 @@ public class NotificationService {
         checkSenderPresence(Collections.singletonList(message.getChannelKind()));
         senderMap.get(message.getChannelKind()).sendMessage(message);
     }
+
+//    public  void readMessage()
 }

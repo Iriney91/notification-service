@@ -1,5 +1,11 @@
 package notificationService.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import notificationService.component.TelegramSender;
+import notificationService.model.ChannelKind;
+import notificationService.model.Message;
+import notificationService.model.Telegram;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,34 +26,22 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        try (Stream < Path > walk = Files.walk(Paths.get("C:\\Users\\User\\IdeaProjects\\notification-service\\telegram"))){
-            List<String> result = walk.filter(Files::isRegularFile)
-                    .map(x -> Files.readAllBytes(x)).collect(Collectors.toList());
-            PrintWriter w = resp.getWriter();
-//            String contents = Files.readAllBytes(Paths.get());
-            w.print(result);
-            w.flush();
-        }catch (IOException e){
-            e.getMessage();
-        }
 
+        TelegramSender telegramSender = new TelegramSender();
+        Message message = telegramSender.readMessage("9caee835-dfa2-49c5-b1d5-c7a4723f4958", ChannelKind.TELEGRAM);
+
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String mjson = mapper.writeValueAsString(message);
+            System.out.println(mjson);
+            PrintWriter w = resp.getWriter();
+            w.print(mjson);
+            w.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
-//        OutputStream out = resp.getOutputStream();
-//
-//        resp.setContentType("application/json");
-//        resp.setCharacterEncoding("UTF-8");
-//
-//        String id = req.getPathInfo().substring(1);
-//
-//        if (id.equals("all")) {
-//            // read all files from dir
-//        } else {
-//            InputStream initialStream = new FileInputStream(new File(id + ".json"));
-//            byte[] buffer = new byte[initialStream.available()];
-//            initialStream.read(buffer);
-//
-//            out.write(buffer);
-//        }
-//        out.flush();
-//    }
 }
