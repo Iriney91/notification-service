@@ -11,7 +11,7 @@ import java.util.List;
 public class TelegramSender<T extends Message> implements  Sender<Message> {
 
     private static final Logger LOGGER = LogManager.getLogger(TelegramSender.class);
-    public static String telegrampath = PropertiesService.getFilePath("C:\\Users\\User\\IdeaProjects\\notification-service\\src\\main\\resources\\telegramSender.properties");
+    public static String telegrampath = PropertiesService.getFilePath("/home/tenjin/Dev/IdeaProjects/notification-service/src/main/resources/telegramSender.properties");
 
     @Override
     public void sendMessage(Message message) {
@@ -31,12 +31,12 @@ public class TelegramSender<T extends Message> implements  Sender<Message> {
     }
 
     @Override
-    public Message readMessage(String id, ChannelKind channelKind) {
+    public Message receiveMessage(String id, ChannelKind channelKind) {
         return Converter.convertFromJson(channelKind, telegrampath, id);
     }
 
     @Override
-    public List <Message> readMessages(ChannelKind channelKind) {
+    public List <Message> receiveMessages(ChannelKind channelKind) {
         return  Converter.convertFromJson(channelKind, telegrampath);
     }
 }

@@ -18,6 +18,12 @@ public abstract class Message {
         creationDate = new Date();
     }
 
+//    public Message(ChannelKind channelKind) {
+//        id = UUID.randomUUID().toString();
+//        creationDate = new Date();
+//        this.channelKind = channelKind;
+//    }
+
     public Message(ChannelKind channelKind, String text, Date sendDate) {
         this();
         this.channelKind = channelKind;

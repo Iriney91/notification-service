@@ -19,12 +19,12 @@ public interface Sender<T extends Message> {
         LOGGER.debug("Send messages: {} by default sender", messages);
     }
 
-    default Message readMessage(String id, ChannelKind channelKind) {
+    default Message receiveMessage(String id, ChannelKind channelKind) {
         LOGGER.debug("Read message: {} by default sender");
         return null;
     }
 
-    default List<Message> readMessages(ChannelKind channelKind) {
+    default List<Message> receiveMessages(ChannelKind channelKind) {
         LOGGER.debug("Read messages: {} by default sender");
         return null;
     }

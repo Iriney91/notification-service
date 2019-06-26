@@ -1,6 +1,5 @@
 package notificationService.service;
 
-import lombok.NonNull;
 import notificationService.component.Sender;
 import notificationService.component.SenderFactory;
 import notificationService.model.ChannelKind;
@@ -65,5 +64,16 @@ public class NotificationService {
         senderMap.get(message.getChannelKind()).sendMessage(message);
     }
 
-//    public  void readMessage()
+   public  List <Message> receiveMessages(ChannelKind channelKind){
+
+        checkSenderPresence(Collections.singletonList(channelKind));
+        return  senderMap.get(channelKind).receiveMessages(channelKind);
+
+   }
+
+   public Message receiveMessage(String id, ChannelKind channelKind){
+
+       checkSenderPresence(Collections.singletonList(channelKind));
+       return senderMap.get(channelKind).receiveMessage(id, channelKind);
+   }
 }
