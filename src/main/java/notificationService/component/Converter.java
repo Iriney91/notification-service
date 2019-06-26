@@ -44,7 +44,7 @@ public class Converter {
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             for (Message message : messages) {
-                File file = new File(path + "/" + message.getId() + ".xml");
+                File file = new File(path + File.separator + message.getId() + ".xml");
                 jaxbMarshaller.marshal(message, file);
             }
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class Converter {
         ObjectMapper mapper = new ObjectMapper();
         for (Message message : messages) {
             try {
-                File f = new File(path + "/" + message.getId() + ".json");
+                File f = new File(path + File.separator + message.getId() + ".json");
                 mapper.writeValue(f, message);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -68,16 +68,16 @@ public class Converter {
     public static Message convertFromJson(ChannelKind channelKind, String path, String id) {
         ObjectMapper mapper = new ObjectMapper();
         String filepath = path + File.separator + id + ".json";
+        System.out.println(filepath);
 
         try {
             switch (channelKind) {
                 case TELEGRAM:
                     Message m = mapper.readValue(new FileInputStream(filepath), Telegram.class);
-                    System.out.println(filepath);
                     return m;
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            LOGGER.debug(e.getMessage());
         }
         return  null;
     }
@@ -96,7 +96,6 @@ public class Converter {
                          messages.add(mapper.readValue(new FileInputStream(file), Telegram.class));
                 }
             }
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -109,7 +108,7 @@ public class Converter {
         for (Message message : messages) {
             try {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                        new FileOutputStream(path + "/" + message.getId() + ".out"));
+                        new FileOutputStream(path + File.separator + message.getId() + ".out"));
                 objectOutputStream.writeObject(message);
                 objectOutputStream.close();
             } catch (Exception e) {
