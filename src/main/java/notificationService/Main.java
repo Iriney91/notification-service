@@ -17,8 +17,9 @@ public class Main {
         EmailMessage emailMessage = new EmailMessage("Orlov", Arrays.asList("Petrov", "Pupkin"), "Hello", new Date());
         PushNotification pushNotification = new PushNotification("1", "Hello", new Date());
         PushNotification pushNotification2 = new PushNotification("1", "Hello", new Date());
-        Telegram telegram = new Telegram("Orlov", Arrays.asList("Petrov", "Pupkin"), "Hello", new Date());
-        Telegram telegram2 = new Telegram("Orlov", Arrays.asList("Petrov", "Pupkin"), "Hello", new Date());
+        Telegram telegram = new Telegram( "Hello", new Date(), "83947555");
+        Telegram telegram2 = new Telegram("Hello", new Date(), "89364653476");
+        Telegram telegram1 = new Telegram("gd", new Date(), "4568570");
         SMSMessage smsMessage = new SMSMessage("Orlov", Arrays.asList("pupkin", "Petrov"), "Hello", new Date());
         List<Message> messages = new ArrayList<>();
         messages.add(emailMessage1);

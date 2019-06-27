@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import java.util.Collections;
 import java.util.List;
 
-public class SMSSender <T extends Message> implements Sender<Message> {
-    private static final Logger LOGGER = LogManager.getLogger(SMSSender.class);
-    public static String smspath = PropertiesService.getFilePath("src/main/resources/smsSender.properties");
+public class SMSMessager<T extends Message> implements Messager<Message> {
+    private static final Logger LOGGER = LogManager.getLogger(SMSMessager.class);
+    public static String smspath = PropertiesService.getFilePath("C:\\Users\\User\\IdeaProjects\\notification-service\\src\\main\\resources\\smsSender.properties");
 
     @Override
     public void sendMessage(Message message) {

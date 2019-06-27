@@ -7,9 +7,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public interface Sender<T extends Message> {
+public interface Messager<T extends Message> {
 
-    Logger LOGGER = LogManager.getLogger(Sender.class);
+    Logger LOGGER = LogManager.getLogger(Messager.class);
 
     default void sendMessage(T message) {
         LOGGER.debug("Send message: {} by default sender", message);

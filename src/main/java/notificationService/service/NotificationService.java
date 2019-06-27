@@ -1,6 +1,6 @@
 package notificationService.service;
 
-import notificationService.component.Sender;
+import notificationService.component.Messager;
 import notificationService.component.SenderFactory;
 import notificationService.model.ChannelKind;
 import notificationService.model.Message;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class NotificationService {
     private static NotificationService instance;
-    private Map<ChannelKind, Sender> senderMap = new HashMap<>();
+    private Map<ChannelKind, Messager> senderMap = new HashMap<>();
     private static final Logger LOGGER = LogManager.getLogger(NotificationService.class);
 
     private NotificationService() {}
@@ -30,7 +30,7 @@ public class NotificationService {
     private void checkSenderPresence(List<ChannelKind> channelKinds) {
 
         if (senderMap.isEmpty()) {
-            List<Sender> list = SenderFactory.create(channelKinds);
+            List<Messager> list = SenderFactory.create(channelKinds);
             list.stream().forEach(a -> senderMap.put(a.getChannelKind(), a));
             LOGGER.info(String.format("senderMap is filled : %d senders", senderMap.size()));
         } else {

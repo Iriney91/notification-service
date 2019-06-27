@@ -8,10 +8,10 @@ import org.apache.logging.log4j.Logger;
 import java.util.Collections;
 import java.util.List;
 
-public class TelegramSender<T extends Message> implements  Sender<Message> {
+public class TelegramMessager<T extends Message> implements Messager<Message> {
 
-    private static final Logger LOGGER = LogManager.getLogger(TelegramSender.class);
-    public static String telegrampath = PropertiesService.getFilePath("/home/tenjin/Dev/IdeaProjects/notification-service/src/main/resources/telegramSender.properties");
+    private static final Logger LOGGER = LogManager.getLogger(TelegramMessager.class);
+    public static String telegrampath = PropertiesService.getFilePath("C:\\Users\\User\\IdeaProjects\\notification-service\\src\\main\\resources\\telegramSender.properties");
 
     @Override
     public void sendMessage(Message message) {

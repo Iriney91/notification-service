@@ -9,21 +9,21 @@ import org.apache.logging.log4j.Logger;
 import java.util.Collections;
 import java.util.List;
 
-public class EmailSender<T extends EmailMessage> implements Sender<Message> {
+public class EmailMessager<T extends EmailMessage> implements Messager<Message> {
 
-    public static String emailpath = PropertiesService.getFilePath("src/main/resources/emailSender.properties");
+    public static String emailpath = PropertiesService.getFilePath("C:\\Users\\User\\IdeaProjects\\notification-service\\src\\main\\resources\\emailSender.properties");
 
-    private static final Logger LOGGER = LogManager.getLogger(EmailSender.class);
+    private static final Logger LOGGER = LogManager.getLogger(EmailMessager.class);
 
     @Override
     public void sendMessage(Message message) {
-        Converter.convertToCSV(Collections.singletonList(message));
+        Converter.main(Collections.singletonList(message));
         LOGGER.debug("Send message: {} by email sender", message);
     }
 
     @Override
     public void sendMessage(List<Message> messages) {
-        Converter.convertToCSV(messages);
+        Converter.main(messages);
         LOGGER.debug("Send message: {} by email sender", messages);
     }
 

@@ -4,8 +4,6 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Data
 public class EmailMessage extends Message {
@@ -35,9 +33,4 @@ public class EmailMessage extends Message {
 //        }
 //        return escapedData;
 //    }
-
-    @Override
-    public String toString() {
-        return emailTo + ';' + emailCC + ";" + getText() + ";" + getSendDate();
-    }
 }

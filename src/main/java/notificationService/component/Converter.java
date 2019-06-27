@@ -1,5 +1,6 @@
 package notificationService.component;
 
+import au.com.bytecode.opencsv.CSVWriter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import notificationService.model.ChannelKind;
 import notificationService.model.Message;
@@ -22,19 +23,36 @@ import java.util.stream.Stream;
 public class Converter {
     private static final Logger LOGGER = LogManager.getLogger(Converter.class);
 
-    public static void convertToCSV(List<Message> messages) {
-        try {
-            String path = EmailSender.emailpath;
-            File f = new File(path + "/emails.csv");
-            FileWriter writer = new FileWriter(f, true);
-            for (Message message : messages) {
-                writer.append(message.toString());
-                writer.append("\n");
-            }
-            writer.flush();
+//    public static void convertToCSV(List<Message> messages) {
+//        try {
+//            String path = EmailMessager.emailpath;
+//            File f = new File(path + "/emails.csv");
+//            FileWriter writer = new FileWriter(f, true);
+//            for (Message message : messages) {
+//                writer.append(message.toString());
+//                writer.append("\n");
+//            }
+//            writer.flush();
+//            writer.close();
+//        } catch (IOException e) {
+//            LOGGER.error(e.getMessage());
+//        }
+//    }
+
+    public static void main(List<Message> messages) {
+        String path = EmailMessager.emailpath;
+        try{
+        CSVWriter writer = new CSVWriter(new FileWriter(path + "/emails.csv", true));
+        //Create record
+        for (Message message : messages) {
+            String[] record = message.getId().split(";");
+            //Write the record to file
+            writer.writeNext(record);
+            //close the writer
             writer.close();
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage());
+
+        }}catch (IOException e){
+            e.getMessage();
         }
     }
 
@@ -79,12 +97,12 @@ public class Converter {
         } catch (IOException e) {
             LOGGER.debug(e.getMessage());
         }
-        return  null;
+        return null;
     }
 
-    public static List <Message> convertFromJson(ChannelKind channelKind, String path) {
+    public static List<Message> convertFromJson(ChannelKind channelKind, String path) {
         ObjectMapper mapper = new ObjectMapper();
-        List <Message> messages = new ArrayList<>();
+        List<Message> messages = new ArrayList<>();
         try (Stream<Path> walk = Files.walk(Paths.get(path))) {
             List<String> files = walk.filter(Files::isRegularFile)
                     .map(x -> x.toString()).collect(Collectors.toList());
@@ -93,15 +111,14 @@ public class Converter {
 
                 switch (channelKind) {
                     case TELEGRAM:
-                         messages.add(mapper.readValue(new FileInputStream(file), Telegram.class));
+                        messages.add(mapper.readValue(new FileInputStream(file), Telegram.class));
                 }
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        return  messages;
+        return messages;
     }
-
 
 
     public static void Serialize(List<Message> messages, String path) {
@@ -116,4 +133,5 @@ public class Converter {
             }
         }
     }
+
 }

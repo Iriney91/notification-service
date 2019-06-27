@@ -7,26 +7,26 @@ import java.util.List;
 
 public class SenderFactory {
 
-    public static Sender create(ChannelKind channelKind) {
+    public static Messager create(ChannelKind channelKind) {
         switch (channelKind) {
             case SMS:
-                return new SMSSender();
+                return new SMSMessager();
             case EMAIL:
-                return new EmailSender();
+                return new EmailMessager();
             case PUSH:
-                return new PushNotificationSender();
+                return new PushNotificationMessager();
             case TELEGRAM:
-                return  new TelegramSender();
+                return  new TelegramMessager();
             default:
                 throw new IllegalArgumentException("Unknown channelKind");
         }
     }
 
-    public static List<Sender> create(List<ChannelKind> kinds) {
-        List<Sender> sender = new ArrayList();
+    public static List<Messager> create(List<ChannelKind> kinds) {
+        List<Messager> messager = new ArrayList();
         for (ChannelKind type : kinds) {
-            sender.add(create(type));
+            messager.add(create(type));
         }
-        return sender;
+        return messager;
     }
 }

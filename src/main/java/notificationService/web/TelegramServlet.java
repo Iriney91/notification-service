@@ -11,9 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/notification-service/telegram")
@@ -25,7 +25,7 @@ public class TelegramServlet extends HttpServlet {
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-//1d35f292-5ee7-4f95-b629-cdeee6d34797"
+//1f884d21-6794-4eb8-95c7-54868ebaaab5"
 
         NotificationService notificationService = NotificationService.getInstance();
         ObjectMapper mapper = new ObjectMapper();
@@ -76,28 +76,51 @@ public class TelegramServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        StringBuilder sb = new StringBuilder();
-        BufferedReader reader = req.getReader();
-        try {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append('\n');
-            }
-        } finally {
-            reader.close();
-        }
+        String text = req.getParameter("text");
+        String phone = req.getParameter("phone");
 
-        System.out.println(sb.toString());
+        System.out.println(text);
+        System.out.println(phone);
+
+        Telegram message = new Telegram(text, new Date(), phone);
+        NotificationService.getInstance().sendMessage(message);
 
         ObjectMapper mapper = new ObjectMapper();
-        Telegram message = mapper.readValue(sb.toString(), Telegram.class);
 
-        System.out.println(message.toString());
-        System.out.println(message.getId());
-        System.out.println(message.getSendDate());
-        System.out.println(message.getText());
-        System.out.println(message.getChannelKind());
-
-        NotificationService.getInstance().sendMessage(message);
+        PrintWriter writer = resp.getWriter();
+        mapper.writeValue(writer, message);
+//        (String telegramTo, List<String> telegramCC, String text, Date sendDate
+//
+//
+//        "text": "Hello",
+//                "channelKind": "TELEGRAM",
+//                "sendDate": 1561544247665,
+//                "telegramTo": "Orlov",
+//                "telegramCC": [
+//        "Petrov",
+//                "Pupkin"
+//    ]
+//        StringBuilder sb = new StringBuilder();
+//        BufferedReader reader = req.getReader();
+//        try {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line).append('\n');
+//            }
+//        } finally {
+//            reader.close();
+//        }
+//        System.out.println(sb.toString());
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        Telegram message = mapper.readValue(sb.toString(), Telegram.class);
+//
+//        System.out.println(message.toString());
+//        System.out.println(message.getId());
+//        System.out.println(message.getSendDate());
+//        System.out.println(message.getText());
+//        System.out.println(message.getChannelKind());
+//
+//        NotificationService.getInstance().sendMessage(message);
     }
 }
