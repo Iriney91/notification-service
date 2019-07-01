@@ -69,6 +69,28 @@ public class Converter {
             e.printStackTrace();
         }
     }
+//
+//    public  static Message convertForXML(){
+//
+//        File xmlFile = new File("employee.xml");
+//
+//        JAXBContext jaxbContext;
+//        try
+//        {
+//            jaxbContext = JAXBContext.newInstance(Employee.class);
+//
+//            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+//
+//            Employee employee = (Employee) jaxbUnmarshaller.unmarshal(xmlFile);
+//
+//            System.out.println(employee);
+//        }
+//        catch (JAXBException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        return  null;
+//    }
 
     public static void convertToJson(List<Message> messages, String path) {
 

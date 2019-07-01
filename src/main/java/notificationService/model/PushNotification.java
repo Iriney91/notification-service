@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
 import java.util.Date;
 
 @Data
-@XmlRootElement
+@XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PushNotification extends Message{
 

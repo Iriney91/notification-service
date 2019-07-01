@@ -25,7 +25,7 @@ public class TelegramServlet extends HttpServlet {
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-//1f884d21-6794-4eb8-95c7-54868ebaaab5"
+//78668d0c-557d-4902-b55e-742212656715"
 
         NotificationService notificationService = NotificationService.getInstance();
         ObjectMapper mapper = new ObjectMapper();
