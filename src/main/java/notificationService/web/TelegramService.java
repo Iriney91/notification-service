@@ -5,6 +5,8 @@ import notificationService.model.ChannelKind;
 import notificationService.model.Message;
 import notificationService.model.PushNotification;
 import notificationService.model.Telegram;
+import notificationService.model.ws.ReceiveMessageRequest;
+import notificationService.model.ws.ReceiveMessageResponse;
 import notificationService.model.ws.SendMessageRequest;
 import notificationService.model.ws.SendMessageResponse;
 import notificationService.service.NotificationService;
@@ -33,17 +35,29 @@ public class TelegramService {
 
     @WebMethod
     @WebResult(partName = "receiveMessagesResponse", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service")
-    public Message receiveMessage(@WebParam(
+    public ReceiveMessageResponse receiveMessage(@WebParam(
             name = "id",
             partName = "receiveMessageIdRequest",
-            targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service") String id,
-                                  @WebParam(
-                                          name = "channel",
-                                          partName = "receiveMessageChannelRequest",
-                                          targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service") ChannelKind channelKind) {
+            targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service")ReceiveMessageRequest request){
 
-        return notificationService.receiveMessage(id, channelKind);
+        ReceiveMessageResponse response = new ReceiveMessageResponse();
+        response.setTelegram((Telegram)notificationService.receiveMessage(request.getId(),request.getChannelKind()));
+        return response;
     }
+
+//    @WebMethod
+//    @WebResult(partName = "receiveMessagesResponse", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service")
+//    public Message receiveMessage(@WebParam(
+//            name = "id",
+//            partName = "receiveMessageIdRequest",
+//            targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service") String id,
+//                                  @WebParam(
+//                                          name = "channel",
+//                                          partName = "receiveMessageChannelRequest",
+//                                          targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service") ChannelKind channelKind) {
+//
+//        return notificationService.receiveMessage(id, channelKind);
+//    }
 
     @WebMethod
     @WebResult(partName = "sendMessageResponse", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service/telegram-service")

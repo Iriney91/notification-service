@@ -7,10 +7,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ReceiveMessageRequest")
 @Data
-@XmlType(name = "SendMessageResponseType")
-public class SendMessageResponse {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ReceiveMessageResponse {
 
-        private Telegram telegram;
+    private Telegram telegram;
 }

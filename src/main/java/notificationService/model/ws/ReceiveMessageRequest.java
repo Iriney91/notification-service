@@ -1,18 +1,17 @@
 package notificationService.model.ws;
 
 import lombok.Data;
+import notificationService.model.ChannelKind;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-import java.util.Date;
 
-@XmlType(name = "SendMessageRequestType")
+@XmlType(name = "ReceiveMessageRequest")
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SendMessageRequest {
+public class ReceiveMessageRequest {
 
-        private String text;
-        private Date sendDate;
-        private String phone;
+    private String id;
+    private ChannelKind channelKind;
 }
