@@ -25,6 +25,13 @@ import java.util.List;
 public class TelegramService {
     NotificationService notificationService = NotificationService.getInstance();
 
+//    @WebMethod
+//    @WebResult(partName = "receiveMessagesResponse", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service")
+//    public List<Message> receiveMessages(@WebParam(partName = "receiveMessagesChannelRequest",
+//            targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service") ChannelKind channelKind) {
+//        return notificationService.receiveMessages(channelKind);
+//    }
+
     @WebMethod
     @WebResult(partName = "receiveMessagesResponse", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service")
     public List<Message> receiveMessages(@WebParam(partName = "receiveMessagesChannelRequest",
@@ -36,7 +43,6 @@ public class TelegramService {
     @WebMethod
     @WebResult(partName = "receiveMessagesResponse", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service")
     public ReceiveMessageResponse receiveMessage(@WebParam(
-            name = "id",
             partName = "receiveMessageIdRequest",
             targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service")ReceiveMessageRequest request){
 
@@ -62,7 +68,6 @@ public class TelegramService {
     @WebMethod
     @WebResult(partName = "sendMessageResponse", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service/telegram-service")
     public SendMessageResponse sendMessage(@WebParam(
-            name = "sendMessageRequest",
             partName = "sendMessageRequest",
             targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service/telegram-service")
                                                    SendMessageRequest request) {

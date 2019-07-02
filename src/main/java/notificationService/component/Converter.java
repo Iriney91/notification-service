@@ -45,7 +45,7 @@ public class Converter {
         CSVWriter writer = new CSVWriter(new FileWriter(path + "/emails.csv", true));
         //Create record
         for (Message message : messages) {
-            String[] record = message.getId().split(";");
+            String[] record = (message.getId()+ message.getCreationDate()+message.getChannelKind()+message.getText()+ message.getSendDate()).split(";");
             //Write the record to file
             writer.writeNext(record);
             //close the writer
