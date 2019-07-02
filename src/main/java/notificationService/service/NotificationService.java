@@ -18,7 +18,8 @@ public class NotificationService {
     private Map<ChannelKind, Messager> senderMap = new HashMap<>();
     private static final Logger LOGGER = LogManager.getLogger(NotificationService.class);
 
-    private NotificationService() {}
+    private NotificationService() {
+    }
 
     public static NotificationService getInstance() {
         if (instance == null) {
@@ -43,7 +44,7 @@ public class NotificationService {
         }
     }
 
-    public void sendMessages(List<Message> messages) {
+    public List <Message> sendMessages(List<Message> messages) {
         if (messages == null || messages.size() < 1) {
             throw new IllegalArgumentException("Messages is empty");
         }
@@ -56,24 +57,25 @@ public class NotificationService {
         messages.stream()
                 .collect(Collectors.groupingBy(Message::getChannelKind, Collectors.toList()))
                 .forEach((channelKind, list) -> senderMap.get(channelKind).sendMessage(list));
-
+        return messages;
     }
 
-    public void sendMessage(Message message){
+    public Message sendMessage(Message message) {
         checkSenderPresence(Collections.singletonList(message.getChannelKind()));
         senderMap.get(message.getChannelKind()).sendMessage(message);
+        return message;
     }
 
-   public  List <Message> receiveMessages(ChannelKind channelKind){
+    public List<Message> receiveMessages(ChannelKind channelKind) {
 
         checkSenderPresence(Collections.singletonList(channelKind));
-        return  senderMap.get(channelKind).receiveMessages(channelKind);
+        return senderMap.get(channelKind).receiveMessages(channelKind);
 
-   }
+    }
 
-   public Message receiveMessage(String id, ChannelKind channelKind){
+    public Message receiveMessage(String id, ChannelKind channelKind) {
 
-       checkSenderPresence(Collections.singletonList(channelKind));
-       return senderMap.get(channelKind).receiveMessage(id, channelKind);
-   }
+        checkSenderPresence(Collections.singletonList(channelKind));
+        return senderMap.get(channelKind).receiveMessage(id, channelKind);
+    }
 }

@@ -4,6 +4,9 @@ package notificationService.web;
 import notificationService.model.ChannelKind;
 import notificationService.model.Message;
 import notificationService.model.PushNotification;
+import notificationService.model.Telegram;
+import notificationService.model.ws.SendMessageRequest;
+import notificationService.model.ws.SendMessageResponse;
 import notificationService.service.NotificationService;
 
 import javax.jws.WebMethod;
@@ -14,10 +17,10 @@ import javax.jws.soap.SOAPBinding;
 import java.util.Date;
 import java.util.List;
 
-@WebService(serviceName = "NotificationWebService", portName = "NotificationWebPort", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service")
+@WebService(serviceName = "TelegramService", portName = "NotificationWebPort", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 
-public class NotificationWebService {
+public class TelegramService {
     NotificationService notificationService = NotificationService.getInstance();
 
     @WebMethod
@@ -43,9 +46,17 @@ public class NotificationWebService {
     }
 
     @WebMethod
-    public PushNotification sendMessage(PushNotification message) {
-        PushNotification push = new PushNotification("1", "Hello", new Date());
-        notificationService.sendMessage(push);
-        return push;
+    @WebResult(partName = "sendMessageResponse", targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service/telegram-service")
+    public SendMessageResponse sendMessage(@WebParam(
+            name = "sendMessageRequest",
+            partName = "sendMessageRequest",
+            targetNamespace = "http://www.itfbgroup.ru/telecom/notification-service/telegram-service")
+                                                   SendMessageRequest request) {
+
+        Telegram message = new Telegram(request.getText(), request.getSendDate(), request.getPhone());
+
+        SendMessageResponse response = new SendMessageResponse();
+        response.setTelegram((Telegram) notificationService.sendMessage(message));
+        return response;
     }
 }

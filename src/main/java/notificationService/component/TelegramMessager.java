@@ -2,6 +2,7 @@ package notificationService.component;
 
 import notificationService.model.ChannelKind;
 import notificationService.model.Message;
+import notificationService.model.Telegram;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
