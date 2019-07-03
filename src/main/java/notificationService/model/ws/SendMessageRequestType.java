@@ -1,18 +1,18 @@
 package notificationService.model.ws;
 
-
 import lombok.Data;
-import notificationService.model.Telegram;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-import java.util.List;
+import java.util.Date;
 
-@XmlType(name = "ReceiveMessagesRequest")
+@XmlType(name = "SendMessageRequestType")
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ReceiveMessagesResponse {
+public class SendMessageRequestType {
 
-    private List <Telegram> telegram;
+        private String text;
+        private Date sendDate;
+        private String phone;
 }

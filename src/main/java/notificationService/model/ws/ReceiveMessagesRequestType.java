@@ -1,16 +1,16 @@
 package notificationService.model.ws;
 
 import lombok.Data;
-import notificationService.model.Telegram;
+import notificationService.model.ChannelKind;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = "ReceiveMessageRequest")
+@XmlType(name = "ReceiveMessagesRequestType")
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ReceiveMessageResponse {
+public class ReceiveMessagesRequestType {
 
-    private Telegram telegram;
+    private ChannelKind channelKind;
 }
