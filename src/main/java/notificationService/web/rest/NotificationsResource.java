@@ -45,14 +45,14 @@ public class NotificationsResource {
 //        return Response.status(201).entity(notification).build();
 //    }
 
-    @POST
-    @Path("/post/")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response postNotification(SendMessageRequest request) {
-
-        Telegram message = new Telegram(request.getText(), request.getSendDate(), request.getPhone());
-        SendMessageResponse response = new SendMessageResponse();
-        return Response.status(201).entity(response.setTelegram((Telegram)notificationService.sendMessage(message))).build();
-    }
+//    @POST
+//    @Path("/post/")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response postNotification(SendMessageRequest request) {
+//
+//        Telegram message = new Telegram(request.getText(), request.getSendDate(), request.getPhone());
+//        SendMessageResponse response = new SendMessageResponse();
+//        return Response.status(201).entity(response.setTelegram((Telegram)notificationService.sendMessage(message))).build();
+//    }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SMSMessager<T extends Message> implements Messager<Message> {
     private static final Logger LOGGER = LogManager.getLogger(SMSMessager.class);
-    public static Path propertyFilePath = Paths.get(CommonUtil.readProperty("telegramSender.properties").getProperty("message.path"));
+    public static Path propertyFilePath = Paths.get(CommonUtil.readProperty("smsSender.properties").getProperty("message.path"));
 
     @Override
     public void sendMessage(Message message) {
