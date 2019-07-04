@@ -1,6 +1,5 @@
 package notificationService.component;
 
-import au.com.bytecode.opencsv.CSVWriter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import notificationService.model.ChannelKind;
 import notificationService.model.Message;
@@ -20,45 +19,49 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static notificationService.component.EmailMessager.propertyFilePath;
+
 public class Converter {
     private static final Logger LOGGER = LogManager.getLogger(Converter.class);
 
-//    public static void convertToCSV(List<Message> messages) {
-//        try {
-//            String path = EmailMessager.emailpath;
-//            File f = new File(path + "/emails.csv");
-//            FileWriter writer = new FileWriter(f, true);
-//            for (Message message : messages) {
-//                writer.append(message.toString());
-//                writer.append("\n");
-//            }
-//            writer.flush();
-//            writer.close();
-//        } catch (IOException e) {
-//            LOGGER.error(e.getMessage());
-//        }
-//    }
-
-    public static void main(List<Message> messages) {
-        String path = EmailMessager.emailpath;
-        try{
-        CSVWriter writer = new CSVWriter(new FileWriter(path + "/emails.csv", true));
-        //Create record
-        for (Message message : messages) {
-            String[] record = (message.getId()+ message.getCreationDate()+message.getChannelKind()+message.getText()+ message.getSendDate()).split(";");
-            //Write the record to file
-            writer.writeNext(record);
-            //close the writer
+    public static void convertToCSV(List<Message> messages) {
+        try {
+            String tempName = "emails.csv";
+            Path filePath = propertyFilePath.resolve(tempName);
+            File f = new File(filePath.toString());
+            FileWriter writer = new FileWriter(f, true);
+            for (Message message : messages) {
+                writer.append(message.toString());
+                writer.append("\n");
+            }
+            writer.flush();
             writer.close();
-
-        }}catch (IOException e){
-            e.getMessage();
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
         }
     }
 
-    public static void convertToXML(List<Message> messages, String path) {
+//    public static void main(List<Message> messages) {
+//        String path = EmailMessager.propertyFilePath;
+//        System.out.println(path);
+//        try{
+//        CSVWriter writer = new CSVWriter(new FileWriter(path + "/emails.csv", true));
+//        //Create record
+//        for (Message message : messages) {
+//            String[] record = (message.getId()+ message.getCreationDate()+message.getChannelKind()+message.getText()+ message.getSendDate()).split(";");
+//            //Write the record to file
+//            writer.writeNext(record);
+//            //close the writer
+//            writer.close();
+//
+//        }}catch (IOException e){
+//            e.getMessage();
+//        }
+//    }
+
+    public static void convertToXML(List<Message> messages, Path path) {
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(PushNotification.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(Message.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             for (Message message : messages) {
@@ -92,7 +95,7 @@ public class Converter {
 //        return  null;
 //    }
 
-    public static void convertToJson(List<Message> messages, String path) {
+    public static void convertToJson(List<Message> messages, Path path) {
 
         ObjectMapper mapper = new ObjectMapper();
         for (Message message : messages) {
@@ -105,7 +108,7 @@ public class Converter {
         }
     }
 
-    public static Message convertFromJson(ChannelKind channelKind, String path, String id) {
+    public static Message convertFromJson(ChannelKind channelKind, Path path, String id) {
         ObjectMapper mapper = new ObjectMapper();
         String filepath = path + File.separator + id + ".json";
         System.out.println(filepath);
@@ -122,10 +125,10 @@ public class Converter {
         return null;
     }
 
-    public static List<Message> convertFromJson(ChannelKind channelKind, String path) {
+    public static List<Message> convertFromJson(ChannelKind channelKind, Path path) {
         ObjectMapper mapper = new ObjectMapper();
         List<Message> messages = new ArrayList<>();
-        try (Stream<Path> walk = Files.walk(Paths.get(path))) {
+        try (Stream<Path> walk = Files.walk(Paths.get(path.toString()))) {
             List<String> files = walk.filter(Files::isRegularFile)
                     .map(x -> x.toString()).collect(Collectors.toList());
 
@@ -143,7 +146,7 @@ public class Converter {
     }
 
 
-    public static void Serialize(List<Message> messages, String path) {
+    public static void Serialize(List<Message> messages, Path path) {
         for (Message message : messages) {
             try {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(
