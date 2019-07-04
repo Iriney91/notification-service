@@ -1,4 +1,4 @@
-package notificationService.web;
+package notificationService.web.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import notificationService.model.ChannelKind;

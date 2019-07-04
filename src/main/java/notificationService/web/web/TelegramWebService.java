@@ -1,4 +1,4 @@
-package notificationService.web;
+package notificationService.web.web;
 
 
 import notificationService.model.Telegram;
