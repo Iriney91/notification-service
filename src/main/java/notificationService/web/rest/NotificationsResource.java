@@ -1,9 +1,6 @@
 package notificationService.web.rest;
 
 import notificationService.model.ChannelKind;
-import notificationService.model.Telegram;
-import notificationService.model.rest.SendMessageRequest;
-import notificationService.model.rest.SendMessageResponse;
 import notificationService.service.NotificationService;
 
 import javax.ws.rs.*;
