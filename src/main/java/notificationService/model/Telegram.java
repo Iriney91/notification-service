@@ -13,6 +13,7 @@ public class Telegram extends Message {
 
     public Telegram() {
         super();
+        setChannelKind(ChannelKind.TELEGRAM);
     }
 
     public Telegram(String text, Date sendDate, String phone) {
