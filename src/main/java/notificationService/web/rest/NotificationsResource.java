@@ -15,19 +15,22 @@ import java.util.stream.Collectors;
 
 
 @Api(value = "notification-service")
+@Produces({MediaType.APPLICATION_JSON})
+@Consumes({MediaType.APPLICATION_JSON})
 @Path("/notifications")
 public class NotificationsResource {
     NotificationService notificationService = NotificationService.getInstance();
 
     @GET
     @Path("/ping")
+    @ApiOperation("online")
     public Response ping() {
         return Response.ok().entity("Service online").build();
     }
 
     @GET
-    @Path("/get/{ChannelKind}")
     @ApiOperation(value = "sendMessagesAll")
+    @Path("/get/{ChannelKind}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNotification(@PathParam("ChannelKind") ChannelKind channelKind) {
         return Response.ok()
@@ -50,7 +53,7 @@ public class NotificationsResource {
     }
 
     @POST
-    @Path("/post/")
+    @Path("/post")
     @ApiOperation(value = "CreateMessage")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
