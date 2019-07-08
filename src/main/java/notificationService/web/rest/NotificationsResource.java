@@ -1,7 +1,8 @@
 package notificationService.web.rest;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import notificationService.model.ChannelKind;
-import notificationService.model.Message;
 import notificationService.model.Telegram;
 import notificationService.model.dto.TelegramMapper;
 import notificationService.model.dto.rest.TelegramDTO;
@@ -12,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.stream.Collectors;
 
+
+@Api(value = "notification-service")
 @Path("/notifications")
 public class NotificationsResource {
     NotificationService notificationService = NotificationService.getInstance();
@@ -24,6 +27,7 @@ public class NotificationsResource {
 
     @GET
     @Path("/get/{ChannelKind}")
+    @ApiOperation(value = "sendMessagesAll")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNotification(@PathParam("ChannelKind") ChannelKind channelKind) {
         return Response.ok()
@@ -37,6 +41,7 @@ public class NotificationsResource {
 
     @GET
     @Path("/get/{ChannelKind}/{id}")
+    @ApiOperation(value = "SendMessage")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNotification(@PathParam("ChannelKind") ChannelKind channelKind, @PathParam("id") String id) {
         return Response.ok()
@@ -46,6 +51,7 @@ public class NotificationsResource {
 
     @POST
     @Path("/post/")
+    @ApiOperation(value = "CreateMessage")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response postNotification(TelegramDTO telegramDto) {
